@@ -3,284 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1v1 Ticket </title> 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <title>1v1 Ticket Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #111827; /* dark gray background */
+            padding: 20px;
+        }
+        #form-wrapper {
+            background-color: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(230, 57, 70, 0.2);
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #E63946;
+            animation: fadeIn 0.8s ease-out;
+        }
+        #logo {
+            display: block;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px auto;
+        }
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        label {
+            color: #E63946;
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+        .file-upload-label {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        .file-upload-label:hover {
+            background-color: #444;
+        }
+        #submit-button {
+            width: 100%;
+            padding: 15px;
+            background-image: linear-gradient(to right, #E63946 0%, #c9303d 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+        #submit-button:hover {
+            background-image: linear-gradient(to right, #c9303d 0%, #E63946 100%);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+            transform: translateY(-2px);
+        }
+        #success-message {
+            color: #28a745;
+            text-align: center;
+            font-size: 18px;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body>
 
-    <div class="w-full max-w-md p-4">
-
+    <div id="form-wrapper">
+        <img src="IMG_1788.JPG" alt="Logo" id="logo">
+        <h1>1v1 Ticket Registration</h1>
+        
         <!-- Registration Form -->
-        <div id="registration-section">
-             <div class="text-center mb-4">
-                <div class="w-24 h-24 bg-gray-200 mx-auto rounded-full flex items-center justify-center border-2 border-red-500">
-                    <span class="text-gray-500">Logo</span>
-                </div>
-            </div>
-            <h1 class="text-3xl font-bold text-center mb-6 text-red-500">1v1 Ticket Registration</h1>
-            <div class="bg-black p-6 rounded-lg shadow-md">
-                <form id="ticket-form" class="space-y-4" data-netlify="true" name="ticket-registration">
-                    <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-white">Full Name</label>
-                        <input type="text" id="name" name="name" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                     <div>
-                        <label for="branche" class="block mb-2 text-sm font-medium text-white">Branche</label>
-                        <input type="text" id="branche" name="branche" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                    <div>
-                        <label for="massar" class="block mb-2 text-sm font-medium text-white">Num de Massar</label>
-                        <input type="text" id="massar" name="massar" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                    <div>
-                        <label for="cin" class="block mb-2 text-sm font-medium text-white">Num de Cart Nationnal</label>
-                        <input type="text" id="cin" name="cin" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                    <div>
-                        <label for="semestre" class="block mb-2 text-sm font-medium text-white">Semestre</label>
-                        <select id="semestre" name="semestre" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white">
-                            <option>S1</option>
-                            <option>S2</option>
-                            <option>S3</option>
-                            <option>S4</option>
-                            <option>S5</option>
-                            <option>S6</option>
-                            <option>je n'ai pas de problème de temps</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-white">Email Address</label>
-                        <input type="email" id="email" name="email" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                    <div>
-                        <label for="phone" class="block mb-2 text-sm font-medium text-white">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" data-netlify="true" class="w-full p-2.5 bg-gray-800 border border-red-500 rounded-lg focus:ring-red-500 focus:border-red-500 text-white" required />
-                    </div>
-                    <div>
-                        <label for="photo" class="block mb-2 text-sm font-medium text-white">Upload Photo</label>
-                        <input type="file" id="photo" name="photo" data-netlify="true" accept="image/*" class="w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700" required />
-                    </div>
-                    <button id="submit-button" type="submit" class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
-                </form> 
-            </div>
-        </div>
+        <form id="ticket-form" name="ticket-registration">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="branche">Branche</label>
+            <input type="text" id="branche" name="branche" required />
+
+            <label for="massar">Num de Massar</label>
+            <input type="text" id="massar" name="massar" required />
+
+            <label for="cin">Num de Cart Nationnal</label>
+            <input type="text" id="cin" name="cin" required />
+
+            <label for="semestre">Semestre</label>
+            <select id="semestre" name="semestre">
+                <option>S1</option>
+                <option>S2</option>
+                <option>S3</option>
+                <option>S4</option>
+                <option>S5</option>
+                <option>S6</option>
+                <option>je n'ai pas de problème de temps</option>
+            </select>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required />
+
+            <label for="photo" class="file-upload-label">Upload Photo</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required />
+
+            <button id="submit-button" type="submit">Register</button>
+        </form>
 
         <!-- Success Message -->
-        <div id="success-message" class="hidden text-center bg-black p-8 rounded-lg">
-            <h2 class="text-2xl font-bold mb-4 text-green-500">Registration Successful!</h2>
-            <p class="text-white">Thank you for registering. We have received your information.</p>
-        </div>
-
-        <!-- Choice Section -->
-        <div id="choice-section" class="hidden text-center bg-black p-8 rounded-lg">
-            <h2 class="text-2xl font-bold mb-4 text-white">Confirm Your Registration</h2>
-            <p class="mb-2 text-white"><span class="font-semibold">Name:</span> <span id="confirm-name"></span></p>
-            <p class="mb-2 text-white"><span class="font-semibold">Email:</span> <span id="confirm-email"></span></p>
-            <p class="mb-6 text-white"><span class="font-semibold">Phone:</span> <span id="confirm-phone"></span></p>
-            <img id="confirm-photo" src="" alt="User Photo" class="mx-auto w-32 h-32 rounded-full object-cover border-4 border-red-500 mb-6" />
-            <p class="mb-6 text-white">Is this information correct?</p>
-            <div class="flex justify-center gap-4">
-                <button id="choice-yes" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Yes, Generate Ticket</button>
-                <button id="choice-no" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">No, Start Over</button>
-            </div>
-        </div>
-
-        <!-- Ticket Section -->
-        <div id="ticket-wrapper" class="hidden">
-            <div id="ticket-section" class="bg-black border-2 border-red-500 rounded-lg p-6 shadow-lg shadow-red-500/50 text-white">
-                <div class="text-center mb-4 border-b border-red-500 pb-4">
-                     <div class="w-20 h-20 bg-gray-800 mx-auto rounded-full flex items-center justify-center border-2 border-red-500 mb-2">
-                        <span class="text-gray-400">Logo</span>
-                    </div>
-                    <h2 class="text-3xl font-bold text-red-500">EVENT TICKET</h2>
-                    <p class="text-gray-400">1v1 Grand Finale</p> 
-                </div>
-                <div class="flex items-center gap-6 mb-4">
-                    <img id="ticket-photo" src="" alt="User Photo" class="w-32 h-32 rounded-lg object-cover border-2 border-red-500" />
-                    <div class="flex-1 space-y-1">
-                        <p class="text-lg"><span class="font-semibold text-gray-400">Name:</span> <span id="ticket-name"></span></p>
-                        <p class="text-sm"><span class="font-semibold text-gray-400">CIN:</span> <span id="ticket-cin"></span></p>
-                        <p class="text-sm"><span class="font-semibold text-gray-400">Massar:</span> <span id="ticket-massar"></span></p>
-                        <p class="text-sm"><span class="font-semibold text-gray-400">Branche:</span> <span id="ticket-branche"></span></p>
-                        <p class="text-sm"><span class="font-semibold text-gray-400">Semestre:</span> <span id="ticket-semestre"></span></p>
-                    </div>
-                </div>
-                 <div class="mt-4 pt-4 border-t border-red-500 flex justify-between items-center">
-                    <div id="qrcode" class="bg-white p-2 rounded-lg"></div>
-                    <div class="text-right">
-                        <p class="text-sm"><span class="font-semibold text-gray-400">Ticket ID:</span></p>
-                        <p id="ticket-id" class="text-xs"></p>
-                    </div>
-                </div>
-                <p class="text-center text-xs text-gray-500 mt-4">This ticket grants entry to one person. Not for resale.</p>
-            </div>
-            <button id="download-pdf" class="mt-6 w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Download PDF</button>
-            <button id="download-json" class="mt-2 w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Download Data (JSON)</button>
-            <p class="text-xs text-center text-gray-600 mt-2">Le bouton 'Download Data' enregistre vos informations dans un fichier JSON sur votre ordinateur, car la page ne peut pas les sauvegarder directement sur un serveur.</p>
+        <div id="success-message" style="display: none;">
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering. We have received your information.</p>
         </div>
     </div>
 
-    <script>
-        const { jsPDF } = window.jspdf;
-
-        // State
-        let currentRegistration = {};
-        let photoDataUrl = null;
-
-        // Sections
-        const registrationSection = document.getElementById('registration-section');
-        const choiceSection = document.getElementById('choice-section');
-        const ticketWrapper = document.getElementById('ticket-wrapper');
-
-        // Form and inputs
-        const registrationForm = document.getElementById('registration-form');
-        const photoInput = document.getElementById('photo');
-
-        // Choice buttons
-        const choiceYesBtn = document.getElementById('choice-yes');
-        const choiceNoBtn = document.getElementById('choice-no');
-
-        // Download buttons
-        const downloadPdfBtn = document.getElementById('download-pdf');
-        const downloadJsonBtn = document.getElementById('download-json');
-
-        // --- FUNCTIONS ---
-
-        function showSection(sectionToShow) {
-            registrationSection.classList.add('hidden');
-            choiceSection.classList.add('hidden');
-            ticketWrapper.classList.add('hidden');
-            sectionToShow.classList.remove('hidden');
-        }
-
-        function getBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            });
-        }
-
-        function generateTicket() {
-            // Populate ticket details
-            document.getElementById('ticket-name').textContent = currentRegistration.name;
-            document.getElementById('ticket-cin').textContent = currentRegistration.cin;
-            document.getElementById('ticket-massar').textContent = currentRegistration.massar;
-            document.getElementById('ticket-branche').textContent = currentRegistration.branche;
-            document.getElementById('ticket-semestre').textContent = currentRegistration.semestre;
-            document.getElementById('ticket-id').textContent = currentRegistration.id;
-            document.getElementById('ticket-photo').src = photoDataUrl;
-
-            // Generate QR Code
-            const qrcodeContainer = document.getElementById('qrcode');
-            qrcodeContainer.innerHTML = ''; // Clear previous QR code
-            new QRCode(qrcodeContainer, {
-                text: JSON.stringify({ id: currentRegistration.id, name: currentRegistration.name, cin: currentRegistration.cin }),
-                width: 100,
-                height: 100,
-            });
-
-            showSection(ticketWrapper);
-        }
-        
-        function downloadJson() {
-            const dataStr = JSON.stringify(currentRegistration, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `registration-${currentRegistration.id}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }
-
-        // --- EVENT LISTENERS ---
-
-        registrationForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            currentRegistration = {
-                id: `TICKET-${Date.now()}`,
-                name: data.name,
-                email: data.email,
-                phone: data.phone,
-                branche: data.branche,
-                massar: data.massar,
-                cin: data.cin,
-                semestre: data.semestre,
-            };
-
-            const photoFile = photoInput.files[0];
-            if (photoFile) {
-                photoDataUrl = await getBase64(photoFile);
-            }
-
-            // Populate confirmation details
-            document.getElementById('confirm-name').textContent = currentRegistration.name;
-            document.getElementById('confirm-email').textContent = currentRegistration.email;
-            document.getElementById('confirm-phone').textContent = currentRegistration.phone;
-            document.getElementById('confirm-photo').src = photoDataUrl;
-
-            showSection(choiceSection);
-        });
-
-        choiceYesBtn.addEventListener('click', () => {
-            generateTicket();
-        });
-
-        choiceNoBtn.addEventListener('click', () => {
-            // Reset state
-            currentRegistration = {};
-            photoDataUrl = null;
-            registrationForm.reset();
-            showSection(registrationSection);
-        });
-
-        downloadPdfBtn.addEventListener('click', () => {
-            const ticketElement = document.getElementById('ticket-section');
-            html2canvas(ticketElement, { backgroundColor: '#000000' }).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF('p', 'mm', 'a5');
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const canvasWidth = canvas.width;
-                const canvasHeight = canvas.height;
-                const ratio = canvasWidth / canvasHeight;
-                const pdfHeight = pdfWidth / ratio;
-                
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                pdf.save(`ticket-${currentRegistration.id}.pdf`);
-            });
-        });
-        
-        downloadJsonBtn.addEventListener('click', downloadJson);
-
-    </script>
     <script>
     document.addEventListener("DOMContentLoaded", function () {
         const scriptURL = "https://script.google.com/macros/s/AKfycbyGbgAgAkQ_k710TH-oWFpE8MqYyxFzbNORUiN_aRiZzsVRpm9ZTL4rpb2GDkTh65rlIA/exec";
         const form = document.getElementById("ticket-form");
         const submitButton = document.getElementById("submit-button");
         const successMessage = document.getElementById("success-message");
+        const photoInput = document.getElementById("photo");
+        const fileUploadLabel = document.querySelector(".file-upload-label");
+
+        // Update the label text when a file is chosen
+        photoInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileUploadLabel.textContent = this.files[0].name;
+            } else {
+                fileUploadLabel.textContent = "Upload Photo";
+            }
+        });
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
+
+            // Check if a photo is selected
+            if (photoInput.files.length === 0) {
+                alert("Please upload a photo. It is required.");
+                return; // Stop the submission
+            }
+
             submitButton.disabled = true;
             submitButton.textContent = "جاري التسجيل...";
 
@@ -289,22 +193,22 @@
                 .then(data => {
                     if (data.result === "success") {
                         form.style.display = "none";
+                        document.querySelector('h1').style.display = "none";
                         successMessage.style.display = "block";
                     } else {
-                        // Assuming the Apps Script returns an error message in data.message
                         alert("An error occurred: " + (data.message || "Unknown error"));
                         submitButton.disabled = false;
-                        submitButton.textContent = "تسجل";
+                        submitButton.textContent = "Register";
                     }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
                     alert("An error occurred while submitting the form. Please try again.");
                     submitButton.disabled = false;
-                    submitButton.textContent = "تسجل";
+                    submitButton.textContent = "Register";
                 });
         });
     });
-</script>
+    </script>
 </body>
 </html>
